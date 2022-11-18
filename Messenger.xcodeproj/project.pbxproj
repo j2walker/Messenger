@@ -19,6 +19,7 @@
 		D1C2E16D29272A5B00DDA8CD /* PhotoViewerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C2E16C29272A5B00DDA8CD /* PhotoViewerViewController.swift */; };
 		D1C2E16F29272A6700DDA8CD /* NewConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C2E16E29272A6700DDA8CD /* NewConversationViewController.swift */; };
 		D1C2E17129272A7B00DDA8CD /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C2E17029272A7B00DDA8CD /* ProfileViewController.swift */; };
+		D1C2E174292749E100DDA8CD /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C2E173292749E100DDA8CD /* Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		D1C2E16C29272A5B00DDA8CD /* PhotoViewerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoViewerViewController.swift; sourceTree = "<group>"; };
 		D1C2E16E29272A6700DDA8CD /* NewConversationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewConversationViewController.swift; sourceTree = "<group>"; };
 		D1C2E17029272A7B00DDA8CD /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		D1C2E173292749E100DDA8CD /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,6 +121,7 @@
 			children = (
 				D1C2E149292720B400DDA8CD /* AppDelegate.swift */,
 				D1C2E14B292720B400DDA8CD /* SceneDelegate.swift */,
+				D1C2E173292749E100DDA8CD /* Extensions.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -217,6 +220,7 @@
 				D1C2E16F29272A6700DDA8CD /* NewConversationViewController.swift in Sources */,
 				D1C2E14E292720B400DDA8CD /* ConversationsViewController.swift in Sources */,
 				D1C2E16D29272A5B00DDA8CD /* PhotoViewerViewController.swift in Sources */,
+				D1C2E174292749E100DDA8CD /* Extensions.swift in Sources */,
 				D1C2E16B29272A5000DDA8CD /* VideoPlayerViewController.swift in Sources */,
 				D1C2E17129272A7B00DDA8CD /* ProfileViewController.swift in Sources */,
 				D1C2E14A292720B400DDA8CD /* AppDelegate.swift in Sources */,

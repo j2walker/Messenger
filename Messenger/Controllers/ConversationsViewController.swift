@@ -23,10 +23,10 @@ class ConversationsViewController: UIViewController {
             let vc = LoginViewController()
             let nav = UINavigationController(rootViewController: vc)
             nav.modalPresentationStyle = .fullScreen
+            nav.navigationBar.backgroundColor = .gray
             present(nav, animated: false)
         }
     }
 
 
 }
-
