@@ -185,7 +185,7 @@ class RegisterViewController: UIViewController {
               !password.isEmpty,
               !lastName.isEmpty,
               !firstName.isEmpty,
-              !(password.count < 6) else {
+              (password.count >= 6) else {
                 alertUserLoginError()
                 return
         }
@@ -201,7 +201,7 @@ class RegisterViewController: UIViewController {
             }
 
             FirebaseAuth.Auth.auth().createUser(withEmail: email, password: password, completion: { authResult, error in
-                guard authResult != nil, error != nil else {
+                guard authResult != nil, error == nil else {
                     print("error creating user")
                     return
                 }

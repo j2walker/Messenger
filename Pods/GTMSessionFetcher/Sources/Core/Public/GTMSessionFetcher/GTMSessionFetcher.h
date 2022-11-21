@@ -451,7 +451,6 @@ extern "C" {
 
 @class GTMSessionCookieStorage;
 @class GTMSessionFetcher;
-@class GTMSessionFetcherService;
 
 // The configuration block is for modifying the NSURLSessionConfiguration only.
 // DO NOT change any fetcher properties in the configuration block.
@@ -460,8 +459,6 @@ typedef void (^GTMSessionFetcherConfigurationBlock)(GTMSessionFetcher *fetcher,
 typedef void (^GTMSessionFetcherSystemCompletionHandler)(void);
 typedef void (^GTMSessionFetcherCompletionHandler)(NSData *_Nullable data,
                                                    NSError *_Nullable error);
-typedef NSURLSession *_Nullable (^GTMSessionFetcherSessionCreationBlock)(
-    id<NSURLSessionDelegate> _Nullable sessionDelegate);
 typedef void (^GTMSessionFetcherBodyStreamProviderResponse)(NSInputStream *bodyStream);
 typedef void (^GTMSessionFetcherBodyStreamProvider)(
     GTMSessionFetcherBodyStreamProviderResponse response);
@@ -611,19 +608,36 @@ typedef void (^GTMFetcherDecoratorFetcherWillStartCompletionHandler)(NSURLReques
 
 @end
 
-// This protocol allows abstract references to the fetcher service.
+// This protocol allows abstract references to the fetcher service, primarily for
+// fetchers (which may be compiled without the fetcher service class present.)
 //
 // Apps should not need to use this protocol.
 @protocol GTMSessionFetcherServiceProtocol <NSObject>
+// This protocol allows us to call into the service without requiring
+// GTMSessionFetcherService sources in this project
+
+@property(atomic, strong) dispatch_queue_t callbackQueue;
+
+- (BOOL)fetcherShouldBeginFetching:(GTMSessionFetcher *)fetcher;
+- (void)fetcherDidCreateSession:(GTMSessionFetcher *)fetcher;
+- (void)fetcherDidBeginFetching:(GTMSessionFetcher *)fetcher;
+- (void)fetcherDidStop:(GTMSessionFetcher *)fetcher;
 
 - (GTMSessionFetcher *)fetcherWithRequest:(NSURLRequest *)request;
+- (BOOL)isDelayingFetcher:(GTMSessionFetcher *)fetcher;
 
-@property(atomic, strong, null_resettable, readonly) dispatch_queue_t callbackQueue;
-
-// These properties are being removed from the protocol; clients should not attempt new
-// accesses to them.
 @property(atomic, assign) BOOL reuseSession;
+- (nullable NSURLSession *)session;
+- (nullable NSURLSession *)sessionForFetcherCreation;
+- (nullable id<NSURLSessionDelegate>)sessionDelegate;
+- (nullable NSDate *)stoppedAllFetchersDate;
+
 @property(atomic, readonly, strong, nullable) NSOperationQueue *delegateQueue;
+
+@optional
+// This property is optional, for now, to enable releasing the feature without breaking existing
+// code that fakes the service but doesn't implement this.
+@property(atomic, readonly, strong, nullable) NSArray<id<GTMFetcherDecoratorProtocol>> *decorators;
 
 @end  // @protocol GTMSessionFetcherServiceProtocol
 
@@ -937,7 +951,7 @@ __deprecated_msg("implement GTMSessionFetcherAuthorizer instead")
 #pragma clang diagnostic pop
 
 // The service object that created and monitors this fetcher, if any.
-@property(atomic, strong) GTMSessionFetcherService *service;
+@property(atomic, strong) id<GTMSessionFetcherServiceProtocol> service;
 
 // The host, if any, used to classify this fetcher in the fetcher service.
 @property(atomic, copy, nullable) NSString *serviceHost;

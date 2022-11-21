@@ -8,4 +8,8 @@ pod 'Firebase/Core'
 pod 'Firebase/Auth'
 pod 'Firebase/Database'
 
+pod 'FBSDKLoginKit'
+
+pod 'GoogleSignIn'
+
 end
