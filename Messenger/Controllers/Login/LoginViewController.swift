@@ -206,6 +206,7 @@ class LoginViewController: UIViewController {
                     print("Something went wrong with Firebase login from Google: \(error)")
                     return
                 }
+                UserDefaults.standard.set(true, forKey: "googleSignIn")
                 strongSelf.navigationController?.dismiss(animated: true, completion: nil)
             })
         }
