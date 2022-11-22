@@ -152,6 +152,9 @@ class LoginViewController: UIViewController {
             guard let email = user?.profile?.email,
                   let firstName = user?.profile?.givenName,
                   let lastName = user?.profile?.familyName else { return }
+            
+            UserDefaults.standard.set(email, forKey: "email")
+            
             DatabaseManager.shared.userExists(with: email, completion: { exists in
                 if !exists {
                     let chatUser = ChatAppUser(firstName: firstName,
@@ -298,6 +301,8 @@ extension LoginViewController: LoginButtonDelegate {
                 print("Failed to get email and name from fb result")
                 return
             }
+            
+            UserDefaults.standard.set(email, forKey: "email")
             
             DatabaseManager.shared.userExists(with: email, completion: { exists in
                 if !exists {
