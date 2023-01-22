@@ -80,7 +80,9 @@ class ChatViewController: MessagesViewController {
         self.conversationID = id
         self.otherUserEmail = email
         super.init(nibName: nil, bundle: nil)
+        print("inside init")
         if let conversationID = conversationID {
+            print("inside listen")
             listenForMessages(id: conversationID, shouldScrollToBottom: true)
         }
     }
@@ -97,7 +99,6 @@ class ChatViewController: MessagesViewController {
         messagesCollectionView.messagesLayoutDelegate = self
         messagesCollectionView.messagesDisplayDelegate = self
         messageInputBar.delegate = self
-        
     }
     
     private func listenForMessages(id: String, shouldScrollToBottom: Bool) {
@@ -107,26 +108,28 @@ class ChatViewController: MessagesViewController {
                 guard !messages.isEmpty else {
                     return
                 }
+                print("\(messages)")
+                
                 self?.messages = messages
+                
                 DispatchQueue.main.async {
                     self?.messagesCollectionView.reloadDataAndKeepOffset()
+                    
                     if shouldScrollToBottom {
                         self?.messagesCollectionView.scrollToLastItem()
                     }
+                    
                 }
             case .failure(let error):
                 print("Failed to get messages: \(error)")
             }
-            
         })
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         messageInputBar.inputTextView.becomeFirstResponder()
-        
     }
-    
 }
 
 extension ChatViewController: InputBarAccessoryViewDelegate {
@@ -134,6 +137,7 @@ extension ChatViewController: InputBarAccessoryViewDelegate {
         guard !text.replacingOccurrences(of: " ", with: "").isEmpty,
         let selfSender = self.selfSender,
         let messageID = createMessageID() else {
+            print("Failed to create messageID")
             return
         }
         
@@ -145,25 +149,27 @@ extension ChatViewController: InputBarAccessoryViewDelegate {
         // Send Message
         if isNewConversation {
             // create convo in database
-            
             DatabaseManager.shared.createNewConversation(with: otherUserEmail, name: self.title ?? "User", firstMessage: message, completion: { [weak self] success in
                 if success {
-                    print("message sent")
+                    print("message sent as newConversation")
                     self?.isNewConversation = false
                 }
                 else {
-                    print("failed to send")
+                    print("failed to send as newConversation")
                 }
             })
         }
         else {
+            guard let conversationID = conversationID, let name = self.title else {
+                return
+            }
             // append to existing conversation data
-            DatabaseManager.shared.sendMessage(to: otherUserEmail, message: message, completion: { success in
+            DatabaseManager.shared.sendMessage(to: conversationID, otherUserEmail: otherUserEmail, name: name, newMessage: message, completion: { success in
                 if success {
-                    print("message sent")
+                    print("message sent as existingConversation")
                 }
                 else {
-                    print("failed to send")
+                    print("failed to send as existingConversation")
                 }
             })
         }

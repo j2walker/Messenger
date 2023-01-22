@@ -218,6 +218,7 @@ class RegisterViewController: UIViewController {
                                            emailAddress: email)
                 DatabaseManager.shared.insertUser(with: chatUser, completion: { success in
                     if success {
+                        UserDefaults.standard.set(email, forKey: "email")
                         // upload image
                         guard let image = strongSelf.imageView.image, let data = image.pngData() else { return }
                         let fileName = chatUser.profilePictureFileName

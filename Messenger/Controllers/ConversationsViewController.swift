@@ -59,9 +59,12 @@ class ConversationsViewController: UIViewController {
     }
     
     private func startListeningForConversations() {
+        print("listening for conversations before userDefaults")
         guard let email = UserDefaults.standard.value(forKey: "email") as? String else { return }
         
         let safeEmail = DatabaseManager.safeEmail(emailAddress: email)
+        
+        print("listening for conversations")
        
         DatabaseManager.shared.getAllConversations(for: safeEmail, completion: { [weak self] result in
             switch result {
@@ -69,6 +72,7 @@ class ConversationsViewController: UIViewController {
                 guard !conversations.isEmpty else {
                     return
                 }
+                print("out of databaseManager, got new convo, trying to update tableView")
                 self?.conversations = conversations
                 
                 DispatchQueue.main.async {
