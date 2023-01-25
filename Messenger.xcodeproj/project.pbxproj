@@ -26,6 +26,7 @@
 		D1C2E16F29272A6700DDA8CD /* NewConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C2E16E29272A6700DDA8CD /* NewConversationViewController.swift */; };
 		D1C2E17129272A7B00DDA8CD /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C2E17029272A7B00DDA8CD /* ProfileViewController.swift */; };
 		D1C2E174292749E100DDA8CD /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C2E173292749E100DDA8CD /* Extensions.swift */; };
+		D1CC35AC2980F7D600E70840 /* NewConversationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1CC35AB2980F7D600E70840 /* NewConversationCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +53,7 @@
 		D1C2E16E29272A6700DDA8CD /* NewConversationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewConversationViewController.swift; sourceTree = "<group>"; };
 		D1C2E17029272A7B00DDA8CD /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		D1C2E173292749E100DDA8CD /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		D1CC35AB2980F7D600E70840 /* NewConversationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewConversationCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +120,7 @@
 				D1C2E162292727B200DDA8CD /* Storyboards */,
 				D1C2E152292720B500DDA8CD /* Assets.xcassets */,
 				D17FF06B292DE9B300E4B860 /* ConversationTableViewCell.swift */,
+				D1CC35AB2980F7D600E70840 /* NewConversationCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -300,6 +303,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D1C2E16429272A0100DDA8CD /* LoginViewController.swift in Sources */,
+				D1CC35AC2980F7D600E70840 /* NewConversationCell.swift in Sources */,
 				D1A168562928149A00421F61 /* DatabaseManager.swift in Sources */,
 				D1C2E16629272A0F00DDA8CD /* RegisterViewController.swift in Sources */,
 				D1C2E16F29272A6700DDA8CD /* NewConversationViewController.swift in Sources */,
@@ -464,6 +468,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Messenger/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "Please allow access to take photos";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Please allow access to upload photos";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Please allow access to upload photos";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -494,6 +499,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Messenger/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "Please allow access to take photos";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Please allow access to upload photos";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Please allow access to upload photos";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;

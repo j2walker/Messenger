@@ -38,6 +38,50 @@ final class StorageManager {
         })
     }
     
+    /// Upload image that will be sent in a chat message
+    public func uploadMessagePhoto(with data: Data, fileName: String, completion: @escaping UploadPictureCompletion) {
+        storage.child("message_images/\(fileName)").putData(data, completion: { [weak self] metadata, error in
+            guard error == nil else {
+                // failed
+                print("Failed to upload data to firebase for picture")
+                completion(.failure(StorageErrors.failedToUpload))
+                return
+            }
+            self?.storage.child("message_images/\(fileName)").downloadURL(completion: { url, error in
+                guard let url = url else {
+                    print("")
+                    completion(.failure(StorageErrors.failedToGetDownloadURL))
+                    return
+                }
+                let urlString = url.absoluteString
+                print("Download URL returned: \(urlString)")
+                completion(.success(urlString))
+            })
+        })
+    }
+    
+    /// Upload video that will be sent in a chat message
+    public func uploadMessageVideo(with fileURL: URL, fileName: String, completion: @escaping UploadPictureCompletion) {
+        storage.child("message_videos/\(fileName)").putFile(from: fileURL, completion: { [weak self] metadata, error in
+            guard error == nil else {
+                // failed
+                print("Failed to upload video file")
+                completion(.failure(StorageErrors.failedToUpload))
+                return
+            }
+            self?.storage.child("message_videos/\(fileName)").downloadURL(completion: { url, error in
+                guard let url = url else {
+                    print("")
+                    completion(.failure(StorageErrors.failedToGetDownloadURL))
+                    return
+                }
+                let urlString = url.absoluteString
+                print("Download URL returned: \(urlString)")
+                completion(.success(urlString))
+            })
+        })
+    }
+    
     public enum StorageErrors: Error {
         case failedToUpload
         case failedToGetDownloadURL
