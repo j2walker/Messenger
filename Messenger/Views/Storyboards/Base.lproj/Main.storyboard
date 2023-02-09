@@ -55,17 +55,17 @@
             </objects>
             <point key="canvasLocation" x="-170" y="1496"/>
         </scene>
-        <!--Map View Controller-->
+        <!--Map-->
         <scene sceneID="IP2-LP-VHa">
             <objects>
-                <viewController id="hKn-ws-rm9" customClass="MapViewController" sceneMemberID="viewController">
+                <viewController id="hKn-ws-rm9" customClass="MapViewController" customModule="Messenger" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="OfL-pP-0Yi">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="fJk-q2-fCs"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <navigationItem key="navigationItem" id="mjQ-ym-V2J"/>
+                    <navigationItem key="navigationItem" title="Map" id="mjQ-ym-V2J"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Nui-dI-t6k" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -126,13 +126,13 @@
             </objects>
             <point key="canvasLocation" x="-170" y="751"/>
         </scene>
-        <!--Item-->
+        <!--Map-->
         <scene sceneID="aD8-dH-JW6">
             <objects>
                 <navigationController id="H4h-V9-vHM" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" image="map" catalog="system" id="f2j-UF-ejl"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Brv-Hn-IgA">
-                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                    <tabBarItem key="tabBarItem" title="Map" image="map" catalog="system" id="f2j-UF-ejl"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="Brv-Hn-IgA">
+                        <rect key="frame" x="0.0" y="59" width="393" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>

@@ -28,6 +28,7 @@
 		D1C2E17129272A7B00DDA8CD /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C2E17029272A7B00DDA8CD /* ProfileViewController.swift */; };
 		D1C2E174292749E100DDA8CD /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C2E173292749E100DDA8CD /* Extensions.swift */; };
 		D1CC35AC2980F7D600E70840 /* NewConversationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1CC35AB2980F7D600E70840 /* NewConversationCell.swift */; };
+		D1CFD6992994D77C001B357A /* LocationPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1CFD6982994D77C001B357A /* LocationPickerViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,6 +57,7 @@
 		D1C2E17029272A7B00DDA8CD /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		D1C2E173292749E100DDA8CD /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		D1CC35AB2980F7D600E70840 /* NewConversationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewConversationCell.swift; sourceTree = "<group>"; };
+		D1CFD6982994D77C001B357A /* LocationPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationPickerViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +115,7 @@
 				D1C2E17029272A7B00DDA8CD /* ProfileViewController.swift */,
 				D17AC8AB292B5C6D00A9B29F /* ChatViewController.swift */,
 				D14ECE8D2982594000A9B00C /* MapViewController.swift */,
+				D1CFD6982994D77C001B357A /* LocationPickerViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -308,6 +311,7 @@
 				D1C2E16429272A0100DDA8CD /* LoginViewController.swift in Sources */,
 				D1CC35AC2980F7D600E70840 /* NewConversationCell.swift in Sources */,
 				D1A168562928149A00421F61 /* DatabaseManager.swift in Sources */,
+				D1CFD6992994D77C001B357A /* LocationPickerViewController.swift in Sources */,
 				D1C2E16629272A0F00DDA8CD /* RegisterViewController.swift in Sources */,
 				D1C2E16F29272A6700DDA8CD /* NewConversationViewController.swift in Sources */,
 				D1C2E14E292720B400DDA8CD /* ConversationsViewController.swift in Sources */,
@@ -399,7 +403,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -453,6 +457,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
