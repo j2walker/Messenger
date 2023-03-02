@@ -25,7 +25,7 @@ class LocationPickerViewController: UIViewController {
     
     init(coordinates: CLLocationCoordinate2D?) {
         guard let coordinates = coordinates else {
-            self.isPickable = true
+            isPickable = true
             super.init(nibName: nil, bundle: nil)
             return
         }
@@ -86,7 +86,6 @@ class LocationPickerViewController: UIViewController {
         for annotation in map.annotations {
             map.removeAnnotation(annotation)
         }
-        
         // drop in on that location to see where the pin is dropped
         let pin = MKPointAnnotation()
         pin.coordinate = coordinates

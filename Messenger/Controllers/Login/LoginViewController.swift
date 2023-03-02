@@ -7,9 +7,10 @@
 
 import UIKit
 import FirebaseAuth
+import FirebaseCore
+import FirebaseAnalytics
 import FBSDKLoginKit
 import GoogleSignIn
-import Firebase
 import JGProgressHUD
 
 class LoginViewController: UIViewController {
@@ -157,6 +158,8 @@ class LoginViewController: UIViewController {
             
             UserDefaults.standard.set(email, forKey: "email")
             UserDefaults.standard.set("\(firstName) \(lastName)", forKey: "name")
+            UserDefaults.standard.set(firstName, forKey: "firstName")
+            UserDefaults.standard.set(lastName, forKey: "lastName")
             
             DatabaseManager.shared.userExists(with: email, completion: { exists in
                 if !exists {
@@ -254,6 +257,8 @@ class LoginViewController: UIViewController {
                         return
                     }
                     UserDefaults.standard.set("\(firstName) \(lastName)", forKey: "name")
+                    UserDefaults.standard.set(firstName, forKey: "firstName")
+                    UserDefaults.standard.set(lastName, forKey: "lastName")
                     
                 case .failure(let error):
                     print("Failed to read data with error \(error)")

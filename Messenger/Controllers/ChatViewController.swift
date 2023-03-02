@@ -70,6 +70,8 @@ class ChatViewController: MessagesViewController {
     private var senderPhotoURl: URL?
     private var otherUserPhotoURL: URL?
     
+    
+    
     public static let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateStyle = .medium
@@ -79,7 +81,7 @@ class ChatViewController: MessagesViewController {
     }()
     
     public let otherUserEmail: String
-    private let conversationID: String?
+    private var conversationID: String?
     public var isNewConversation = false
     
     private var messages = [Message]()
@@ -93,15 +95,13 @@ class ChatViewController: MessagesViewController {
                senderId: safeEmail,
                displayName: "Me")
     }
-    
-    
+
     init(with email: String, id: String?) {
-        self.conversationID = id
-        self.otherUserEmail = email
+        conversationID = id
+        otherUserEmail = email
+        
         super.init(nibName: nil, bundle: nil)
-        print("inside init")
         if let conversationID = conversationID {
-            print("inside listen")
             listenForMessages(id: conversationID, shouldScrollToBottom: true)
         }
     }
@@ -110,8 +110,18 @@ class ChatViewController: MessagesViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        DispatchQueue.main.async {
+            self.messagesCollectionView.reloadData()
+            self.messagesCollectionView.scrollToLastItem(animated: false)
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        initializeHideKeyboard()
         
         view.backgroundColor = .red
         messagesCollectionView.messagesDataSource = self
@@ -127,14 +137,16 @@ class ChatViewController: MessagesViewController {
         button.setSize(CGSize(width: 35, height: 35), animated: false)
         button.setImage(UIImage(systemName: "paperclip"), for: .normal)
         button.onTouchUpInside { [weak self] _ in
+            self?.inputView?.resignFirstResponder()
+            self?.inputView?.isHidden = true
             self?.presentInputActionSheet()
         }
         messageInputBar.setLeftStackViewWidthConstant(to: 36, animated: false)
         messageInputBar.setStackViewItems([button], forStack: .left, animated: false)
-        
     }
     
     private func presentInputActionSheet() {
+        
         let actionSheet = UIAlertController(title: "Attach Media",
                                             message: "What would you like to attach?",
                                             preferredStyle: .actionSheet)
@@ -281,11 +293,6 @@ class ChatViewController: MessagesViewController {
             }
         })
     }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        messageInputBar.inputTextView.becomeFirstResponder()
-    }
 }
 
 extension ChatViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
@@ -403,6 +410,8 @@ extension ChatViewController: InputBarAccessoryViewDelegate {
             return
         }
         
+        inputBar.inputTextView.text = ""
+        
         print("Sending: \(text)")
         let message = Message(sender: selfSender,
                               messageId: messageID,
@@ -415,6 +424,9 @@ extension ChatViewController: InputBarAccessoryViewDelegate {
                 if success {
                     print("message sent as newConversation")
                     self?.isNewConversation = false
+                    let newConversationID = "conversation_\(message.messageId)"
+                    self?.conversationID = newConversationID
+                    self?.listenForMessages(id: newConversationID, shouldScrollToBottom: true)
                 }
                 else {
                     print("failed to send as newConversation")
@@ -449,7 +461,6 @@ extension ChatViewController: InputBarAccessoryViewDelegate {
         print("created mesage id: \(newIdentifier)")
         return newIdentifier
     }
-    
 }
 
 extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, MessagesDisplayDelegate {
@@ -594,5 +605,15 @@ extension ChatViewController: MessageCellDelegate {
         }
     }
 }
-
-
+extension ChatViewController {
+    func initializeHideKeyboard(){
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(
+            target: self,
+            action: #selector(dismissMyKeyboard))
+        tap.numberOfTapsRequired = 1
+        view.addGestureRecognizer(tap)
+    }
+    @objc func dismissMyKeyboard(){
+        view.endEditing(true)
+    }
+}

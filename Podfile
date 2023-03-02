@@ -4,12 +4,12 @@
 target 'Messenger' do
   use_frameworks!
 
-pod 'Firebase/Core'
-pod 'Firebase/Auth'
-pod 'Firebase/Database'
-pod 'Firebase/Storage'
-pod 'Firebase/Analytics'
-pod 'Firebase/Crashlytics'
+pod 'FirebaseCore'
+pod 'FirebaseAuth'
+pod 'FirebaseDatabase'
+pod 'FirebaseStorage'
+pod 'FirebaseCrashlytics'
+pod 'FirebaseAnalytics'
 
 pod 'FBSDKLoginKit'
 

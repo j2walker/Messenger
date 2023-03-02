@@ -213,6 +213,12 @@ class RegisterViewController: UIViewController {
                     print("error creating user")
                     return
                 }
+                
+                UserDefaults.standard.set("\(firstName) \(lastName)", forKey: "name")
+                UserDefaults.standard.set(email, forKey: "email")
+                UserDefaults.standard.set(firstName, forKey: "firstName")
+                UserDefaults.standard.set(lastName, forKey: "lastName")
+                
                 let chatUser = ChatAppUser(firstName: firstName,
                                            lastName: lastName,
                                            emailAddress: email)
@@ -309,12 +315,10 @@ extension RegisterViewController: UIImagePickerControllerDelegate, UINavigationC
             return
         }
         
-        self.imageView.image = selectedImage
+        imageView.image = selectedImage
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true, completion: nil)
     }
-    
-    
 }

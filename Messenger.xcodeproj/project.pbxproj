@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		26C90C8AE54E3D4705399A2A /* Pods_Messenger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79399B37D00D1BB2FCDB683F /* Pods_Messenger.framework */; };
+		B2ED54A2B24C054DC3C0E2E5 /* Pods_Messenger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25E8E4A4FA238ED8BD02CC6F /* Pods_Messenger.framework */; };
 		D1135606292B65A600F2327D /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1135605292B65A600F2327D /* StorageManager.swift */; };
 		D14ECE8E2982594000A9B00C /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D14ECE8D2982594000A9B00C /* MapViewController.swift */; };
 		D17AC8AC292B5C6D00A9B29F /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D17AC8AB292B5C6D00A9B29F /* ChatViewController.swift */; };
@@ -29,12 +29,13 @@
 		D1C2E174292749E100DDA8CD /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C2E173292749E100DDA8CD /* Extensions.swift */; };
 		D1CC35AC2980F7D600E70840 /* NewConversationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1CC35AB2980F7D600E70840 /* NewConversationCell.swift */; };
 		D1CFD6992994D77C001B357A /* LocationPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1CFD6982994D77C001B357A /* LocationPickerViewController.swift */; };
+		D1E8E96429ADF700003DE95A /* Friend.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1E8E96329ADF700003DE95A /* Friend.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		120848ACEC18918B6DD27B26 /* Pods-Messenger.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Messenger.debug.xcconfig"; path = "Target Support Files/Pods-Messenger/Pods-Messenger.debug.xcconfig"; sourceTree = "<group>"; };
-		79399B37D00D1BB2FCDB683F /* Pods_Messenger.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Messenger.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		A25436A00F3472525800E804 /* Pods-Messenger.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Messenger.release.xcconfig"; path = "Target Support Files/Pods-Messenger/Pods-Messenger.release.xcconfig"; sourceTree = "<group>"; };
+		12CC6CA02A478E1E89047407 /* Pods-Messenger.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Messenger.debug.xcconfig"; path = "Target Support Files/Pods-Messenger/Pods-Messenger.debug.xcconfig"; sourceTree = "<group>"; };
+		25E8E4A4FA238ED8BD02CC6F /* Pods_Messenger.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Messenger.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3006DAD6286D5AFBA4652E4D /* Pods-Messenger.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Messenger.release.xcconfig"; path = "Target Support Files/Pods-Messenger/Pods-Messenger.release.xcconfig"; sourceTree = "<group>"; };
 		D1135605292B65A600F2327D /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		D14ECE8D2982594000A9B00C /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		D17AC8AB292B5C6D00A9B29F /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
@@ -58,6 +59,7 @@
 		D1C2E173292749E100DDA8CD /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		D1CC35AB2980F7D600E70840 /* NewConversationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewConversationCell.swift; sourceTree = "<group>"; };
 		D1CFD6982994D77C001B357A /* LocationPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationPickerViewController.swift; sourceTree = "<group>"; };
+		D1E8E96329ADF700003DE95A /* Friend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Friend.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,20 +67,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				26C90C8AE54E3D4705399A2A /* Pods_Messenger.framework in Frameworks */,
+				B2ED54A2B24C054DC3C0E2E5 /* Pods_Messenger.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		24E1F5FD8358E9328AE0C1AC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				25E8E4A4FA238ED8BD02CC6F /* Pods_Messenger.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		D1C2E13D292720B400DDA8CD = {
 			isa = PBXGroup;
 			children = (
 				D1C2E148292720B400DDA8CD /* Messenger */,
 				D1C2E147292720B400DDA8CD /* Products */,
 				F7EB480CE9CC07B1D85A3E0D /* Pods */,
-				D38C403E45A535F8FC71D628 /* Frameworks */,
+				24E1F5FD8358E9328AE0C1AC /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -153,6 +163,7 @@
 				D1C2E173292749E100DDA8CD /* Extensions.swift */,
 				D1A168552928149A00421F61 /* DatabaseManager.swift */,
 				D1135605292B65A600F2327D /* StorageManager.swift */,
+				D1E8E96329ADF700003DE95A /* Friend.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -175,19 +186,11 @@
 			path = Login;
 			sourceTree = "<group>";
 		};
-		D38C403E45A535F8FC71D628 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				79399B37D00D1BB2FCDB683F /* Pods_Messenger.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		F7EB480CE9CC07B1D85A3E0D /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				120848ACEC18918B6DD27B26 /* Pods-Messenger.debug.xcconfig */,
-				A25436A00F3472525800E804 /* Pods-Messenger.release.xcconfig */,
+				12CC6CA02A478E1E89047407 /* Pods-Messenger.debug.xcconfig */,
+				3006DAD6286D5AFBA4652E4D /* Pods-Messenger.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -199,11 +202,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D1C2E15A292720B500DDA8CD /* Build configuration list for PBXNativeTarget "Messenger" */;
 			buildPhases = (
-				248A776CC82126BA6393B965 /* [CP] Check Pods Manifest.lock */,
+				6026B53112379F674B4D4474 /* [CP] Check Pods Manifest.lock */,
 				D1C2E142292720B400DDA8CD /* Sources */,
 				D1C2E143292720B400DDA8CD /* Frameworks */,
 				D1C2E144292720B400DDA8CD /* Resources */,
-				0FE5BC662469F14BA63332C2 /* [CP] Embed Pods Frameworks */,
+				58A21A9D162E5F89E2E80055 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -222,7 +225,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1410;
-				LastUpgradeCheck = 1410;
+				LastUpgradeCheck = 1420;
 				TargetAttributes = {
 					D1C2E145292720B400DDA8CD = {
 						CreatedOnToolsVersion = 14.1;
@@ -262,7 +265,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		0FE5BC662469F14BA63332C2 /* [CP] Embed Pods Frameworks */ = {
+		58A21A9D162E5F89E2E80055 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -279,7 +282,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Messenger/Pods-Messenger-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		248A776CC82126BA6393B965 /* [CP] Check Pods Manifest.lock */ = {
+		6026B53112379F674B4D4474 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -323,6 +326,7 @@
 				D17FF06C292DE9B300E4B860 /* ConversationTableViewCell.swift in Sources */,
 				D17AC8AC292B5C6D00A9B29F /* ChatViewController.swift in Sources */,
 				D1C2E14C292720B400DDA8CD /* SceneDelegate.swift in Sources */,
+				D1E8E96429ADF700003DE95A /* Friend.swift in Sources */,
 				D1135606292B65A600F2327D /* StorageManager.swift in Sources */,
 				D14ECE8E2982594000A9B00C /* MapViewController.swift in Sources */,
 			);
@@ -386,6 +390,8 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = "\"build/Debug-iphoneos/FirebaseAuth\"";
+				"FRAMEWORK_SEARCH_PATHS[arch=*]" = "";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -403,7 +409,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
-				ONLY_ACTIVE_ARCH = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -467,7 +473,7 @@
 		};
 		D1C2E15B292720B500DDA8CD /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 120848ACEC18918B6DD27B26 /* Pods-Messenger.debug.xcconfig */;
+			baseConfigurationReference = 12CC6CA02A478E1E89047407 /* Pods-Messenger.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -477,6 +483,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Messenger/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "Please allow access to take photos";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Please allow access to share current location";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Please allow access to upload photos";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Please allow access to upload photos";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -498,7 +505,7 @@
 		};
 		D1C2E15C292720B500DDA8CD /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A25436A00F3472525800E804 /* Pods-Messenger.release.xcconfig */;
+			baseConfigurationReference = 3006DAD6286D5AFBA4652E4D /* Pods-Messenger.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -508,6 +515,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Messenger/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "Please allow access to take photos";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Please allow access to share current location";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Please allow access to upload photos";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Please allow access to upload photos";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
