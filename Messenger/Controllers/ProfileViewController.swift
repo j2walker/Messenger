@@ -12,7 +12,7 @@ import GoogleSignIn
 import SDWebImage
 
 enum ProfileViewModelType {
-    case info, logout
+    case info, logout, button
 }
 
 struct ProfileViewModel {
@@ -39,6 +39,9 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate &
         data.append(ProfileViewModel(viewModelType: .info,
                                      title: "Email: \(UserDefaults.standard.value(forKey: "email") as? String ?? "No Email")",
                                      hanlder: nil))
+        data.append(ProfileViewModel(viewModelType: .button, title: "Try to encode lol", hanlder: {
+            KeyManager.shared.createPrivateKey()
+        }))
         data.append(ProfileViewModel(viewModelType: .logout, title: "Log Out", hanlder: { [weak self] in
             guard let strongSelf = self else {
                 return
@@ -76,6 +79,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate &
             strongSelf.present(actionSheet, animated: true)
             
         }))
+        
         
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         tableView.delegate = self
@@ -225,6 +229,9 @@ class ProfileTableViewCell: UITableViewCell {
             selectionStyle = .none
         case .logout:
             textLabel?.textColor = .red
+            textLabel?.textAlignment = .center
+        case .button:
+            textLabel?.textColor = .white
             textLabel?.textAlignment = .center
         }
     }

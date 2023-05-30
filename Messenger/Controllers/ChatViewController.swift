@@ -70,8 +70,6 @@ class ChatViewController: MessagesViewController {
     private var senderPhotoURl: URL?
     private var otherUserPhotoURL: URL?
     
-    
-    
     public static let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateStyle = .medium
@@ -83,6 +81,7 @@ class ChatViewController: MessagesViewController {
     public let otherUserEmail: String
     private var conversationID: String?
     public var isNewConversation = false
+    private var plus = true
     
     private var messages = [Message]()
     
@@ -92,10 +91,10 @@ class ChatViewController: MessagesViewController {
         }
         let safeEmail = DatabaseManager.safeEmail(emailAddress: email)
         return Sender(photoURL: "",
-               senderId: safeEmail,
-               displayName: "Me")
+                      senderId: safeEmail,
+                      displayName: "Me")
     }
-
+    
     init(with email: String, id: String?) {
         conversationID = id
         otherUserEmail = email
@@ -120,16 +119,66 @@ class ChatViewController: MessagesViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         initializeHideKeyboard()
         
-        view.backgroundColor = .red
         messagesCollectionView.messagesDataSource = self
         messagesCollectionView.messagesLayoutDelegate = self
         messagesCollectionView.messagesDisplayDelegate = self
         messagesCollectionView.messageCellDelegate = self
         messageInputBar.delegate = self
         setupInputButton()
+        setupAddFriend()
+    }
+    
+    private func setupAddFriend() {
+        DatabaseManager.shared.isFriends(with: otherUserEmail, completion: { [weak self] completion in
+            guard let self = self else { return }
+            if (!completion) {
+                let addButton = UIBarButtonItem(image: UIImage(systemName: "plus.circle"), style: .plain, target: self, action: #selector(didTapAddFriend))
+                addButton.tintColor = .green
+                self.navigationItem.rightBarButtonItem = addButton
+            } else {
+                let minusButton = UIBarButtonItem(image: UIImage(systemName: "minus.circle"), style: .plain, target: self, action: #selector(didTapAddFriend))
+                minusButton.tintColor = .red
+                self.navigationItem.rightBarButtonItem = minusButton
+                self.plus = false
+            }
+        })
+        
+    }
+    
+    
+    @objc private func didTapAddFriend() {
+        if (!plus) {
+            DatabaseManager.shared.removeFriend(with: otherUserEmail, completion: { [weak self] completion in
+                guard let self = self else { return }
+                if (completion) {
+                    DispatchQueue.main.async {
+                        UIView.animate(withDuration: 0.7) {
+                            let imageName = "plus.circle"
+                            let imageColor = UIColor.green
+                            let newImage = UIImage(systemName: imageName)
+                            self.navigationItem.rightBarButtonItem?.image = newImage?.withRenderingMode(.alwaysOriginal)
+                            self.navigationItem.rightBarButtonItem?.tintColor = imageColor
+                        }
+                    }
+            }})
+        } else {
+            DatabaseManager.shared.addFriend(with: otherUserEmail, completion: { [weak self] completion in
+                guard let self = self else { return }
+                if (completion) {
+                    DispatchQueue.main.async {
+                        UIView.animate(withDuration: 0.7) {
+                            let imageName = "minus.circle"
+                            let imageColor = UIColor.systemRed
+                            let newImage = UIImage(systemName: imageName)
+                            self.navigationItem.rightBarButtonItem?.image = newImage?.withRenderingMode(.alwaysOriginal)
+                            self.navigationItem.rightBarButtonItem?.tintColor = imageColor
+                        }
+                    }
+                }})
+        }
+        plus.toggle()
     }
     
     private func setupInputButton() {
@@ -315,7 +364,6 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
             let fileName = "photo_message_" + messageID.replacingOccurrences(of: " ", with: "-") + ".png"
             
             // Upload image
-            
             StorageManager.shared.uploadMessagePhoto(with: imageData, fileName: fileName, completion: { [weak self] result in
                 guard let strongSelf = self else {
                     return

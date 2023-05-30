@@ -15,6 +15,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     
     var lastPin = MKPointAnnotation()
     
+    var friendsLocations : [String : CLLocationCoordinate2D] = [:]
+    
     let button: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(systemName: "location.circle"), for: .normal)
@@ -35,19 +37,22 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(map)
-        
         NSLayoutConstraint.activate([
             map.topAnchor.constraint(equalTo: view.topAnchor),
             map.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             map.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             map.leadingAnchor.constraint(equalTo: view.leadingAnchor),
         ])
-        
         button.clipsToBounds = true
         button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
-        
         view.addSubview(button)
-        
+        updateFriendsLocations(completion: { [weak self] in
+            guard let self = self else {return}
+            for (key, _) in friendsLocations {
+                guard let location = friendsLocations[key] else { return }
+                addPin(with: location)
+            }
+        })
     }
     
     @objc func buttonTapped(_ sender:UIButton!) {
@@ -58,6 +63,14 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         super.viewDidLayoutSubviews()
         button.frame = CGRect(x: 25, y: 150, width: 50, height: 50)
         button.layer.cornerRadius = 0.5 * button.bounds.size.width
+    }
+    
+    private func updateFriendsLocations(completion: @escaping () -> Void) {
+        DatabaseManager.shared.getFriendsLocations(completion: { [weak self] location in
+            guard let location = location, let strongSelf = self else { return }
+            strongSelf.friendsLocations = location
+            completion()
+        })
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -93,6 +106,12 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         lastPin = pin
         map.addAnnotation(pin)
         
+    }
+    
+    private func addPin(with location: CLLocationCoordinate2D) {
+        let pin = MKPointAnnotation()
+        pin.coordinate = location
+        map.addAnnotation(pin)
     }
     
 }

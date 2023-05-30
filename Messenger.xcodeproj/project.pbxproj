@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		B2ED54A2B24C054DC3C0E2E5 /* Pods_Messenger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25E8E4A4FA238ED8BD02CC6F /* Pods_Messenger.framework */; };
 		D1135606292B65A600F2327D /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1135605292B65A600F2327D /* StorageManager.swift */; };
+		D12A24D329E4A6CE00938799 /* KeyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D12A24D229E4A6CE00938799 /* KeyManager.swift */; };
 		D14ECE8E2982594000A9B00C /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D14ECE8D2982594000A9B00C /* MapViewController.swift */; };
 		D17AC8AC292B5C6D00A9B29F /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D17AC8AB292B5C6D00A9B29F /* ChatViewController.swift */; };
 		D17FF06C292DE9B300E4B860 /* ConversationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D17FF06B292DE9B300E4B860 /* ConversationTableViewCell.swift */; };
@@ -37,6 +38,7 @@
 		25E8E4A4FA238ED8BD02CC6F /* Pods_Messenger.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Messenger.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3006DAD6286D5AFBA4652E4D /* Pods-Messenger.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Messenger.release.xcconfig"; path = "Target Support Files/Pods-Messenger/Pods-Messenger.release.xcconfig"; sourceTree = "<group>"; };
 		D1135605292B65A600F2327D /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
+		D12A24D229E4A6CE00938799 /* KeyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyManager.swift; sourceTree = "<group>"; };
 		D14ECE8D2982594000A9B00C /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		D17AC8AB292B5C6D00A9B29F /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		D17FF06B292DE9B300E4B860 /* ConversationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationTableViewCell.swift; sourceTree = "<group>"; };
@@ -164,6 +166,7 @@
 				D1A168552928149A00421F61 /* DatabaseManager.swift */,
 				D1135605292B65A600F2327D /* StorageManager.swift */,
 				D1E8E96329ADF700003DE95A /* Friend.swift */,
+				D12A24D229E4A6CE00938799 /* KeyManager.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -325,6 +328,7 @@
 				D1C2E14A292720B400DDA8CD /* AppDelegate.swift in Sources */,
 				D17FF06C292DE9B300E4B860 /* ConversationTableViewCell.swift in Sources */,
 				D17AC8AC292B5C6D00A9B29F /* ChatViewController.swift in Sources */,
+				D12A24D329E4A6CE00938799 /* KeyManager.swift in Sources */,
 				D1C2E14C292720B400DDA8CD /* SceneDelegate.swift in Sources */,
 				D1E8E96429ADF700003DE95A /* Friend.swift in Sources */,
 				D1135606292B65A600F2327D /* StorageManager.swift in Sources */,
@@ -490,6 +494,8 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -497,9 +503,12 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.JackWalker.Messenger;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -522,6 +531,8 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -529,9 +540,12 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.JackWalker.Messenger;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
