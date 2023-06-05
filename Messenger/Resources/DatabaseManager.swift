@@ -733,7 +733,7 @@ extension DatabaseManager {
                 // friend exists already, do nothing
                 completion(false)
             } else {
-                // friend doesn't exists, add to friends
+                // friend doesn't exist, add to friends
                 self?.database.child("\(safeEmail)/friends/\(friendsSafeEmail)").setValue(true)
                 completion(true)
             }
@@ -811,13 +811,23 @@ extension DatabaseManager {
         })
     }
     
-    public func retrieveLocation(with safeEmail: String, completion: @escaping(CLLocationCoordinate2D)->Void) {
+    private func retrieveLocation(with safeEmail: String, completion: @escaping(CLLocationCoordinate2D)->Void) {
         database.child("\(safeEmail)/currentLocation/currentLocation").observeSingleEvent(of: .value, with: { snapshot in
             guard let coordinatesString = snapshot.value as? String else { return }
             let components = coordinatesString.components(separatedBy: ",")
             guard let latitude = Double(components[1]), let longitude = Double(components[0]) else { return }
             let coordinates = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
             completion(coordinates)
+        })
+    }
+    
+    public func retrieveFriendName(with safeEmail: String, completion: @escaping(String)->Void) {
+        database.child("\(safeEmail)/firstName").observeSingleEvent(of: .value, with: { [weak self] snapshot in
+            guard let firstName = snapshot.value as? String else { return }
+            self?.database.child("\(safeEmail)/lastName").observeSingleEvent(of: .value, with: { snapshot in
+                guard let lastName = snapshot.value as? String else { return }
+                    completion(firstName + " " + lastName)
+            })
         })
     }
 }

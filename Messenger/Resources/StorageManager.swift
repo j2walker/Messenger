@@ -102,4 +102,18 @@ final class StorageManager {
         })
     }
     
+    public func downloadImageFromURL(from url: URL, completion: @escaping (UIImage?)->Void) {
+        DispatchQueue.global().async {
+            if let imageData = try? Data(contentsOf: url), let image = UIImage(data: imageData) {
+                DispatchQueue.main.async {
+                    completion(image)
+                }
+            } else {
+                DispatchQueue.main.async {
+                    completion(nil)
+                }
+            }
+        }
+    }
+    
 }

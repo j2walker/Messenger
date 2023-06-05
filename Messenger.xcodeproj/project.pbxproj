@@ -15,6 +15,7 @@
 		D17FF06C292DE9B300E4B860 /* ConversationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D17FF06B292DE9B300E4B860 /* ConversationTableViewCell.swift */; };
 		D1A168542927E95100421F61 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D1A168532927E95100421F61 /* GoogleService-Info.plist */; };
 		D1A168562928149A00421F61 /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A168552928149A00421F61 /* DatabaseManager.swift */; };
+		D1B0F7FA2A298CD00033EC60 /* CustomMapAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B0F7F92A298CD00033EC60 /* CustomMapAnnotation.swift */; };
 		D1C2E14A292720B400DDA8CD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C2E149292720B400DDA8CD /* AppDelegate.swift */; };
 		D1C2E14C292720B400DDA8CD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C2E14B292720B400DDA8CD /* SceneDelegate.swift */; };
 		D1C2E14E292720B400DDA8CD /* ConversationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C2E14D292720B400DDA8CD /* ConversationsViewController.swift */; };
@@ -44,6 +45,7 @@
 		D17FF06B292DE9B300E4B860 /* ConversationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationTableViewCell.swift; sourceTree = "<group>"; };
 		D1A168532927E95100421F61 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D1A168552928149A00421F61 /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
+		D1B0F7F92A298CD00033EC60 /* CustomMapAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CustomMapAnnotation.swift; path = Messenger/Resources/CustomMapAnnotation.swift; sourceTree = SOURCE_ROOT; };
 		D1C2E146292720B400DDA8CD /* Messenger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Messenger.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1C2E149292720B400DDA8CD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D1C2E14B292720B400DDA8CD /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -146,6 +148,7 @@
 		D1C2E15F292722CF00DDA8CD /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				D1B0F7F92A298CD00033EC60 /* CustomMapAnnotation.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -322,6 +325,7 @@
 				D1C2E16F29272A6700DDA8CD /* NewConversationViewController.swift in Sources */,
 				D1C2E14E292720B400DDA8CD /* ConversationsViewController.swift in Sources */,
 				D1C2E16D29272A5B00DDA8CD /* PhotoViewerViewController.swift in Sources */,
+				D1B0F7FA2A298CD00033EC60 /* CustomMapAnnotation.swift in Sources */,
 				D1C2E174292749E100DDA8CD /* Extensions.swift in Sources */,
 				D1C2E16B29272A5000DDA8CD /* VideoPlayerViewController.swift in Sources */,
 				D1C2E17129272A7B00DDA8CD /* ProfileViewController.swift in Sources */,
