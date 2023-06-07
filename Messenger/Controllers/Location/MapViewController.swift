@@ -77,7 +77,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     }
     
     private func updateFriendsLocations(completion: @escaping () -> Void) {
-        DatabaseManager.shared.getFriendsLocations(completion: { [weak self] location in
+        FriendManager.shared.getFriendsLocations(completion: { [weak self] location in
             guard let location = location, let strongSelf = self else { return }
             strongSelf.friendsLocations = location
             completion()
@@ -115,7 +115,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     
     private func addPin(with location: CLLocationCoordinate2D, safeEmail: String) {
         let newPin = CustomMapAnnotation(coordinate: location)
-        DatabaseManager.shared.retrieveFriendName(with: safeEmail, completion: { [weak self] result in
+        FriendManager.shared.retrieveFriendName(with: safeEmail, completion: { [weak self] result in
             newPin.title = result
             newPin.associatedUID = safeEmail
             self?.map.addAnnotation(newPin)

@@ -44,6 +44,8 @@ class ConversationsViewController: UIViewController {
     private var conversations = [Conversation]()
     
     private var friends = [ChatFriend]()
+    
+    private var friendRequests = [FriendRequest]()
 
     private let tableView: UITableView = {
         let table = UITableView()
@@ -70,10 +72,12 @@ class ConversationsViewController: UIViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .compose,
                                                             target: self,
                                                             action: #selector(didTapComposeButton))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "bell"), style: .plain, target: self, action: #selector(didTapNotifications))
         view.addSubview(tableView)
         view.addSubview(noConversationsLabel)
         setupTableView()
         startListeningForConversations()
+        listenForRequests()
         
         loginObserver = NotificationCenter.default.addObserver(forName: .didLogInNotification, object: nil, queue: .main, using: { [weak self] _ in
             guard let strongSelf = self else {
@@ -81,7 +85,27 @@ class ConversationsViewController: UIViewController {
             }
             strongSelf.startListeningForConversations()
         })
-        
+    }
+    
+    @objc private func didTapNotifications() {
+        let vc = NotificationsViewController(friendRequests: friendRequests)
+        let navVC = UINavigationController(rootViewController: vc)
+        present(navVC, animated: true)
+    }
+    
+    private func listenForRequests() {
+        FriendManager.shared.getAllFriendRequests(completion: { [weak self] result in
+            switch result {
+            case .success(let requests):
+                guard !requests.isEmpty else {
+                    return
+                }
+                self?.friendRequests = requests
+                // actually no need to reload because the "requests" view controller will take them
+            case .failure(let error):
+                print("Failed to get friend requests: \(error)")
+            }
+        })
     }
     
     private func startListeningForConversations() {

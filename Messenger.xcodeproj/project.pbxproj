@@ -8,9 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		B2ED54A2B24C054DC3C0E2E5 /* Pods_Messenger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25E8E4A4FA238ED8BD02CC6F /* Pods_Messenger.framework */; };
+		D10857D22A305823002707B3 /* NotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D10857D12A305823002707B3 /* NotificationsViewController.swift */; };
 		D1135606292B65A600F2327D /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1135605292B65A600F2327D /* StorageManager.swift */; };
 		D12A24D329E4A6CE00938799 /* KeyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D12A24D229E4A6CE00938799 /* KeyManager.swift */; };
 		D14ECE8E2982594000A9B00C /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D14ECE8D2982594000A9B00C /* MapViewController.swift */; };
+		D15911932A30394300295B91 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = D15911922A30394300295B91 /* Utilities.swift */; };
 		D17AC8AC292B5C6D00A9B29F /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D17AC8AB292B5C6D00A9B29F /* ChatViewController.swift */; };
 		D17FF06C292DE9B300E4B860 /* ConversationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D17FF06B292DE9B300E4B860 /* ConversationTableViewCell.swift */; };
 		D1A168542927E95100421F61 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D1A168532927E95100421F61 /* GoogleService-Info.plist */; };
@@ -31,16 +33,18 @@
 		D1C2E174292749E100DDA8CD /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C2E173292749E100DDA8CD /* Extensions.swift */; };
 		D1CC35AC2980F7D600E70840 /* NewConversationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1CC35AB2980F7D600E70840 /* NewConversationCell.swift */; };
 		D1CFD6992994D77C001B357A /* LocationPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1CFD6982994D77C001B357A /* LocationPickerViewController.swift */; };
-		D1E8E96429ADF700003DE95A /* Friend.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1E8E96329ADF700003DE95A /* Friend.swift */; };
+		D1E8E96429ADF700003DE95A /* FriendManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1E8E96329ADF700003DE95A /* FriendManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		12CC6CA02A478E1E89047407 /* Pods-Messenger.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Messenger.debug.xcconfig"; path = "Target Support Files/Pods-Messenger/Pods-Messenger.debug.xcconfig"; sourceTree = "<group>"; };
 		25E8E4A4FA238ED8BD02CC6F /* Pods_Messenger.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Messenger.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3006DAD6286D5AFBA4652E4D /* Pods-Messenger.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Messenger.release.xcconfig"; path = "Target Support Files/Pods-Messenger/Pods-Messenger.release.xcconfig"; sourceTree = "<group>"; };
+		D10857D12A305823002707B3 /* NotificationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsViewController.swift; sourceTree = "<group>"; };
 		D1135605292B65A600F2327D /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		D12A24D229E4A6CE00938799 /* KeyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyManager.swift; sourceTree = "<group>"; };
 		D14ECE8D2982594000A9B00C /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		D15911922A30394300295B91 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		D17AC8AB292B5C6D00A9B29F /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		D17FF06B292DE9B300E4B860 /* ConversationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationTableViewCell.swift; sourceTree = "<group>"; };
 		D1A168532927E95100421F61 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -63,7 +67,7 @@
 		D1C2E173292749E100DDA8CD /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		D1CC35AB2980F7D600E70840 /* NewConversationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewConversationCell.swift; sourceTree = "<group>"; };
 		D1CFD6982994D77C001B357A /* LocationPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationPickerViewController.swift; sourceTree = "<group>"; };
-		D1E8E96329ADF700003DE95A /* Friend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Friend.swift; sourceTree = "<group>"; };
+		D1E8E96329ADF700003DE95A /* FriendManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +88,50 @@
 				25E8E4A4FA238ED8BD02CC6F /* Pods_Messenger.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D10857CC2A3057C5002707B3 /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				D17AC8AB292B5C6D00A9B29F /* ChatViewController.swift */,
+				D1C2E16A29272A5000DDA8CD /* VideoPlayerViewController.swift */,
+				D1C2E16C29272A5B00DDA8CD /* PhotoViewerViewController.swift */,
+			);
+			path = Chat;
+			sourceTree = "<group>";
+		};
+		D10857CD2A3057E3002707B3 /* Location */ = {
+			isa = PBXGroup;
+			children = (
+				D14ECE8D2982594000A9B00C /* MapViewController.swift */,
+				D1CFD6982994D77C001B357A /* LocationPickerViewController.swift */,
+			);
+			path = Location;
+			sourceTree = "<group>";
+		};
+		D10857CE2A3057F3002707B3 /* Conversations */ = {
+			isa = PBXGroup;
+			children = (
+				D1C2E14D292720B400DDA8CD /* ConversationsViewController.swift */,
+				D1C2E16E29272A6700DDA8CD /* NewConversationViewController.swift */,
+			);
+			path = Conversations;
+			sourceTree = "<group>";
+		};
+		D10857CF2A305800002707B3 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				D1C2E17029272A7B00DDA8CD /* ProfileViewController.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		D10857D02A30580A002707B3 /* FriendRequests */ = {
+			isa = PBXGroup;
+			children = (
+				D10857D12A305823002707B3 /* NotificationsViewController.swift */,
+			);
+			path = FriendRequests;
 			sourceTree = "<group>";
 		};
 		D1C2E13D292720B400DDA8CD = {
@@ -121,15 +169,12 @@
 		D1C2E15D292722C300DDA8CD /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				D1C2E14D292720B400DDA8CD /* ConversationsViewController.swift */,
+				D10857D02A30580A002707B3 /* FriendRequests */,
+				D10857CF2A305800002707B3 /* Profile */,
+				D10857CE2A3057F3002707B3 /* Conversations */,
+				D10857CD2A3057E3002707B3 /* Location */,
+				D10857CC2A3057C5002707B3 /* Chat */,
 				D1C2E17229272AF600DDA8CD /* Login */,
-				D1C2E16A29272A5000DDA8CD /* VideoPlayerViewController.swift */,
-				D1C2E16C29272A5B00DDA8CD /* PhotoViewerViewController.swift */,
-				D1C2E16E29272A6700DDA8CD /* NewConversationViewController.swift */,
-				D1C2E17029272A7B00DDA8CD /* ProfileViewController.swift */,
-				D17AC8AB292B5C6D00A9B29F /* ChatViewController.swift */,
-				D14ECE8D2982594000A9B00C /* MapViewController.swift */,
-				D1CFD6982994D77C001B357A /* LocationPickerViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -168,8 +213,9 @@
 				D1C2E173292749E100DDA8CD /* Extensions.swift */,
 				D1A168552928149A00421F61 /* DatabaseManager.swift */,
 				D1135605292B65A600F2327D /* StorageManager.swift */,
-				D1E8E96329ADF700003DE95A /* Friend.swift */,
+				D1E8E96329ADF700003DE95A /* FriendManager.swift */,
 				D12A24D229E4A6CE00938799 /* KeyManager.swift */,
+				D15911922A30394300295B91 /* Utilities.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -326,6 +372,7 @@
 				D1C2E14E292720B400DDA8CD /* ConversationsViewController.swift in Sources */,
 				D1C2E16D29272A5B00DDA8CD /* PhotoViewerViewController.swift in Sources */,
 				D1B0F7FA2A298CD00033EC60 /* CustomMapAnnotation.swift in Sources */,
+				D15911932A30394300295B91 /* Utilities.swift in Sources */,
 				D1C2E174292749E100DDA8CD /* Extensions.swift in Sources */,
 				D1C2E16B29272A5000DDA8CD /* VideoPlayerViewController.swift in Sources */,
 				D1C2E17129272A7B00DDA8CD /* ProfileViewController.swift in Sources */,
@@ -334,7 +381,8 @@
 				D17AC8AC292B5C6D00A9B29F /* ChatViewController.swift in Sources */,
 				D12A24D329E4A6CE00938799 /* KeyManager.swift in Sources */,
 				D1C2E14C292720B400DDA8CD /* SceneDelegate.swift in Sources */,
-				D1E8E96429ADF700003DE95A /* Friend.swift in Sources */,
+				D1E8E96429ADF700003DE95A /* FriendManager.swift in Sources */,
+				D10857D22A305823002707B3 /* NotificationsViewController.swift in Sources */,
 				D1135606292B65A600F2327D /* StorageManager.swift in Sources */,
 				D14ECE8E2982594000A9B00C /* MapViewController.swift in Sources */,
 			);

@@ -131,7 +131,7 @@ class ChatViewController: MessagesViewController {
     }
     
     private func setupAddFriend() {
-        DatabaseManager.shared.isFriends(with: otherUserEmail, completion: { [weak self] completion in
+        FriendManager.shared.isFriends(with: otherUserEmail, completion: { [weak self] completion in
             guard let self = self else { return }
             if (!completion) {
                 let addButton = UIBarButtonItem(image: UIImage(systemName: "plus.circle"), style: .plain, target: self, action: #selector(didTapAddFriend))
@@ -150,7 +150,7 @@ class ChatViewController: MessagesViewController {
     
     @objc private func didTapAddFriend() {
         if (!plus) {
-            DatabaseManager.shared.removeFriend(with: otherUserEmail, completion: { [weak self] completion in
+            FriendManager.shared.removeFriend(with: otherUserEmail, completion: { [weak self] completion in
                 guard let self = self else { return }
                 if (completion) {
                     DispatchQueue.main.async {
@@ -164,7 +164,7 @@ class ChatViewController: MessagesViewController {
                     }
             }})
         } else {
-            DatabaseManager.shared.addFriend(with: otherUserEmail, completion: { [weak self] completion in
+            FriendManager.shared.addFriend(with: otherUserEmail, completion: { [weak self] completion in
                 guard let self = self else { return }
                 if (completion) {
                     DispatchQueue.main.async {
@@ -325,7 +325,6 @@ class ChatViewController: MessagesViewController {
                 guard !messages.isEmpty else {
                     return
                 }
-                print("\(messages)")
                 
                 self?.messages = messages
                 

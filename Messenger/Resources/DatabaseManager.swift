@@ -32,7 +32,6 @@ extension DatabaseManager {
             completion(.success(value))
         })
     }
-    
 }
 
 // MARK: - Acount Mgmt
@@ -336,7 +335,6 @@ extension DatabaseManager {
     /// Gets all messages for given conversation
     public func getAllMessagesForConversation(with id: String, completion: @escaping(Result<[Message], Error>) -> Void) {
         database.child("\(id)/messages").observe(.value, with: { snapshot in
-            print("recieved new message")
             guard let value = snapshot.value as? [[String: Any]] else {
                 completion(.failure(DatabseError.failedToFetch))
                 return
@@ -387,7 +385,6 @@ extension DatabaseManager {
                 }
                 
                 else {
-                    
                     kind = .text(content)
                 }
                 
@@ -719,115 +716,6 @@ extension DatabaseManager {
                 return
             }
             completion(true)
-        })
-    }
-    
-    public func addFriend(with friendsSafeEmail: String, completion: @escaping (Bool)->Void) {
-        let email = UserDefaults.standard.value(forKey: "email")
-        guard let email = email as? String else {
-            return
-        }
-        let safeEmail = DatabaseManager.safeEmail(emailAddress: email)
-        database.child("\(safeEmail)/friends/\(friendsSafeEmail)").observeSingleEvent(of: .value, with: { [weak self] snapshot in
-            if snapshot.exists() {
-                // friend exists already, do nothing
-                completion(false)
-            } else {
-                // friend doesn't exist, add to friends
-                self?.database.child("\(safeEmail)/friends/\(friendsSafeEmail)").setValue(true)
-                completion(true)
-            }
-            
-        })
-    }
-    
-    public func removeFriend(with friendsSafeEmail: String, completion: @escaping (Bool)->Void) {
-        let email = UserDefaults.standard.value(forKey: "email")
-        guard let email = email as? String else {
-            return
-        }
-        let safeEmail = DatabaseManager.safeEmail(emailAddress: email)
-        database.child("\(safeEmail)/friends/\(friendsSafeEmail)").observeSingleEvent(of: .value, with: { [weak self] snapshot in
-            if snapshot.exists() {
-                // friend exists already, do nothing
-                self?.database.child("\(safeEmail)/friends/\(friendsSafeEmail)").removeValue()
-                completion(true)
-            } else {
-                // friend doesn't exists, add to friends
-                completion(false)
-            }
-            
-        })
-    }
-    
-    public func updateFriend(with friendsSafeEmail: String, update: Bool, completion: @escaping (Bool)->Void) {
-        let email = UserDefaults.standard.value(forKey: "email")
-        guard let email = email as? String else {
-            return
-        }
-        let safeEmail = DatabaseManager.safeEmail(emailAddress: email)
-        database.child("\(safeEmail)/friends/\(friendsSafeEmail)").observeSingleEvent(of: .value, with: { [weak self] snapshot in
-            if snapshot.exists() {
-                // friend exists already, do nothing
-                self?.database.child("\(safeEmail)/friends/\(friendsSafeEmail)").setValue(update)
-                completion(true)
-            } else {
-                // friend doesn't exists, add to friends
-                completion(false)
-            }
-        })
-    }
-    
-    public func isFriends(with friendsSafeEmail: String, completion: @escaping (Bool)->Void) {
-        let email = UserDefaults.standard.value(forKey: "email")
-        guard let email = email as? String else {
-            return
-        }
-        let safeEmail = DatabaseManager.safeEmail(emailAddress: email)
-        database.child("\(safeEmail)/friends/\(friendsSafeEmail)").observeSingleEvent(of: .value, with: { snapshot in
-            completion(snapshot.exists())
-        })
-    }
-    
-    public func getFriendsLocations(completion: @escaping([String:CLLocationCoordinate2D]?)->Void) {
-        let email = UserDefaults.standard.value(forKey: "email")
-        guard let email = email as? String else { return }
-        let safeEmail = DatabaseManager.safeEmail(emailAddress: email)
-        database.child("\(safeEmail)/friends").observeSingleEvent(of: .value, with: { [weak self] snapshot in
-            guard let snapshotValue = snapshot.value as? [String:Bool], let self = self else { return }
-            var friendsDict: [String: CLLocationCoordinate2D] = [:]
-            let dispatchGroup = DispatchGroup()
-            
-            for (key, _) in snapshotValue {
-                dispatchGroup.enter()
-                self.retrieveLocation(with: key, completion: { location in
-                    friendsDict[key] = location
-                    dispatchGroup.leave()
-                })
-            }
-            dispatchGroup.notify(queue: .main) {
-                completion(friendsDict)
-            }
-        })
-    }
-    
-    private func retrieveLocation(with safeEmail: String, completion: @escaping(CLLocationCoordinate2D)->Void) {
-        database.child("\(safeEmail)/currentLocation/currentLocation").observeSingleEvent(of: .value, with: { snapshot in
-            guard let coordinatesString = snapshot.value as? String else { return }
-            let components = coordinatesString.components(separatedBy: ",")
-            guard let latitude = Double(components[1]), let longitude = Double(components[0]) else { return }
-            let coordinates = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-            completion(coordinates)
-        })
-    }
-    
-    public func retrieveFriendName(with safeEmail: String, completion: @escaping(String)->Void) {
-        database.child("\(safeEmail)/firstName").observeSingleEvent(of: .value, with: { [weak self] snapshot in
-            guard let firstName = snapshot.value as? String else { return }
-            self?.database.child("\(safeEmail)/lastName").observeSingleEvent(of: .value, with: { snapshot in
-                guard let lastName = snapshot.value as? String else { return }
-                    completion(firstName + " " + lastName)
-            })
         })
     }
 }
