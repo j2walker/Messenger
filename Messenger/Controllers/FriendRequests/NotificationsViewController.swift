@@ -6,14 +6,19 @@
 //
 
 import UIKit
+import JGProgressHUD
 
 class NotificationsViewController: UIViewController {
     
-    private var friendRequests: [FriendRequest]
+    public var friendRequests: [FriendRequest]
     
-    private let tableView: UITableView = {
+    private let spinner = JGProgressHUD(style: .dark)
+    
+    weak var fetchDelegate: NotificationFetchDelegate?
+    
+    public let tableView: UITableView = {
         let table = UITableView()
-        table.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+        table.register(NotificationCell.self, forCellReuseIdentifier: NotificationCell.identifier)
         table.isHidden = true
         return table
     }()
@@ -32,10 +37,13 @@ class NotificationsViewController: UIViewController {
         super.viewDidLoad()
         view.addSubview(tableView)
         setupTableView()
-        tableView.reloadData()
-        tableView.isHidden = false
         view.backgroundColor = .secondarySystemBackground
-        print(friendRequests)
+        if friendRequests.isEmpty {
+            showLoadingIndicator()
+        } else {
+            tableView.isHidden = false
+            tableView.reloadData()
+        }
         view.addSubview(noNotificationsLabel)
     }
     
@@ -61,6 +69,33 @@ class NotificationsViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
     }
+    
+    public func showLoadingIndicator() {
+        spinner.show(in: view)
+        spinner.isHidden = false
+        tableView.isHidden = true
+    }
+    
+    public func hideLoadingIndicator() {
+        spinner.dismiss()
+        spinner.isHidden = true
+        tableView.isHidden = false
+    }
+    
+    public func showNoNotifications() {
+        tableView.isHidden = true
+        noNotificationsLabel.isHidden = false
+    }
+    
+    public func hideNoNotifications() {
+        tableView.isHidden = false
+        noNotificationsLabel.isHidden = true
+    }
+    
+    private func deleteNotification(at indexPath: IndexPath) {
+        friendRequests.remove(at: indexPath.row)
+        tableView.reloadData()
+    }
 }
 
 extension NotificationsViewController: UITableViewDelegate, UITableViewDataSource {
@@ -69,9 +104,20 @@ extension NotificationsViewController: UITableViewDelegate, UITableViewDataSourc
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        cell.textLabel?.text = friendRequests[indexPath.row].firstName + " " + friendRequests[indexPath.row].lastName
-        cell.textLabel?.textColor = .white
+        let fr = friendRequests[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: NotificationCell.identifier, for: indexPath) as! NotificationCell
+        cell.configure(with: fr)
+        cell.toDelete = {
+            self.deleteNotification(at: indexPath)
+        }
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 90
+    }
+}
+
+protocol NotificationFetchDelegate: AnyObject {
+    func fetchCompleted(requests: [FriendRequest])
 }

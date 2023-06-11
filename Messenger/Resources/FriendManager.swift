@@ -38,7 +38,6 @@ final class FriendManager {
             } else {
                 // friend doesn't exist, send friend request
                 // needs to be handled by friend once they accept
-//                self?.database.child("\(safeEmail)/friends/\(friendsSafeEmail)").setValue(true)
                 let friendsKnowObj = strongSelf.createFriendKnowledgeObj()
                 guard let friendsKnowObj = friendsKnowObj else { return }
                 var userKnowObj = [String: Any]()
@@ -112,6 +111,9 @@ final class FriendManager {
         }
         safeEmail = DatabaseManager.safeEmail(emailAddress: safeEmail)
         database.child("\(safeEmail)/friendReqs").observe(.value, with: { [weak self] snapshot in
+            if !snapshot.exists() {
+                return
+            }
             guard let requests = snapshot.value as? [[String: String]], let strongSelf = self else {
                 completion(.failure(FriendManagerErrors.failedToFetchRequests))
                 return
@@ -173,11 +175,11 @@ final class FriendManager {
         let safeEmail = DatabaseManager.safeEmail(emailAddress: email)
         database.child("\(safeEmail)/friends/\(friendsSafeEmail)").observeSingleEvent(of: .value, with: { [weak self] snapshot in
             if snapshot.exists() {
-                // friend exists already, do nothing
+                // friend exists already, update
                 self?.database.child("\(safeEmail)/friends/\(friendsSafeEmail)").setValue(update)
                 completion(true)
             } else {
-                // friend doesn't exists, add to friends
+                // friend doesn't exists, do nothing
                 completion(false)
             }
         })
@@ -223,6 +225,124 @@ final class FriendManager {
             guard let latitude = Double(components[1]), let longitude = Double(components[0]) else { return }
             let coordinates = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
             completion(coordinates)
+        })
+    }
+    
+    public func addFriendBack(with friendsSafeEmail: String, completion: @escaping(Bool)->Void) {
+        guard var safeEmail = UserDefaults.standard.value(forKey: "email") as? String else {
+            completion(false)
+            return
+        }
+        safeEmail = DatabaseManager.safeEmail(emailAddress: safeEmail)
+        let selfFriendReqRef = database.child("\(safeEmail)/friendReqs")
+        let friendFriendReqSentRef = database.child("\(friendsSafeEmail)/friendReqsSent")
+        // update self friends entry
+        addFriendToFriends(with: safeEmail, friendsSafeEmail: friendsSafeEmail, completion: { [weak self] value in
+            if value {
+                self?.addFriendToFriends(with: friendsSafeEmail, friendsSafeEmail: safeEmail, completion: { [weak self] value in
+                    if value {
+                        self?.removeFriendReq(with: safeEmail, friendsSafeEmail: friendsSafeEmail, completion: { value in
+                            if value {
+                                self?.removeSentFriendReq(with: safeEmail, friendsSafeEmail: friendsSafeEmail, completion: { value in
+                                    if value {
+                                        completion(true)
+                                        return
+                                    } else {
+                                        completion(false)
+                                        return
+                                    }
+                                })
+                            } else {
+                                completion(false)
+                                return
+                            }
+                        })
+                    } else {
+                        completion(false)
+                        return
+                    }
+                })
+            } else {
+                completion(false)
+                return
+            }
+        })
+    }
+    
+    private func removeSentFriendReq(with safeEmail: String, friendsSafeEmail: String, completion: @escaping (Bool)->Void) {
+        let selfFriendReqRef = database.child("\(friendsSafeEmail)/friendReqs")
+        selfFriendReqRef.observeSingleEvent(of: .value, with: { snapshot in
+            if !snapshot.exists() {
+                completion(false)
+                return
+            }
+            var indexToRemove = -1
+            guard var reqs = snapshot.value as? [[String:Any]] else {
+                completion(false)
+                return
+            }
+            for (index, dict) in reqs.enumerated() {
+                if let value = dict["to"], value as! String == safeEmail {
+                    indexToRemove = index
+                    break
+                }
+            }
+            if (indexToRemove == -1) {
+                completion(false)
+                return
+            }
+            reqs.remove(at: indexToRemove)
+            selfFriendReqRef.setValue(reqs)
+            completion(true)
+        })
+    }
+    
+    private func removeFriendReq(with safeEmail: String, friendsSafeEmail: String, completion: @escaping (Bool)->Void) {
+        let selfFriendReqRef = database.child("\(safeEmail)/friendReqs")
+        selfFriendReqRef.observeSingleEvent(of: .value, with: { snapshot in
+            if !snapshot.exists() {
+                completion(false)
+                return
+            }
+            var indexToRemove = -1
+            guard var reqs = snapshot.value as? [[String:String]] else {
+                completion(false)
+                return
+            }
+            for (index, dict) in reqs.enumerated() {
+                if let value = dict["from"], value == friendsSafeEmail {
+                    indexToRemove = index
+                    break
+                }
+            }
+            if (indexToRemove == -1) {
+                completion(false)
+                return
+            }
+            reqs.remove(at: indexToRemove)
+            selfFriendReqRef.setValue(reqs)
+            completion(true)
+        })
+    }
+    
+    private func addFriendToFriends(with safeEmail: String, friendsSafeEmail: String, completion: @escaping (Bool)->Void) {
+        let ref = database.child("\(safeEmail)/friends")
+        ref.observeSingleEvent(of: .value, with: { snapshot in
+            if snapshot.exists() {
+                // friends exist, download and append, update
+                guard var friends = snapshot.value as? [String:Any] else {
+                    completion(false)
+                    return
+                }
+                friends["\(friendsSafeEmail)"] = true
+                ref.setValue(friends)
+                completion(true)
+            } else {
+                var friends = [String:Any]()
+                friends["\(friendsSafeEmail)"] = true
+                ref.setValue(friends)
+                completion(true)
+            }
         })
     }
     

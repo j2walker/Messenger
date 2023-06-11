@@ -13,6 +13,7 @@
 		D12A24D329E4A6CE00938799 /* KeyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D12A24D229E4A6CE00938799 /* KeyManager.swift */; };
 		D14ECE8E2982594000A9B00C /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D14ECE8D2982594000A9B00C /* MapViewController.swift */; };
 		D15911932A30394300295B91 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = D15911922A30394300295B91 /* Utilities.swift */; };
+		D16323B42A3674F1002E85E3 /* NotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16323B32A3674F1002E85E3 /* NotificationCell.swift */; };
 		D17AC8AC292B5C6D00A9B29F /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D17AC8AB292B5C6D00A9B29F /* ChatViewController.swift */; };
 		D17FF06C292DE9B300E4B860 /* ConversationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D17FF06B292DE9B300E4B860 /* ConversationTableViewCell.swift */; };
 		D1A168542927E95100421F61 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D1A168532927E95100421F61 /* GoogleService-Info.plist */; };
@@ -45,11 +46,12 @@
 		D12A24D229E4A6CE00938799 /* KeyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyManager.swift; sourceTree = "<group>"; };
 		D14ECE8D2982594000A9B00C /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		D15911922A30394300295B91 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		D16323B32A3674F1002E85E3 /* NotificationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCell.swift; sourceTree = "<group>"; };
 		D17AC8AB292B5C6D00A9B29F /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		D17FF06B292DE9B300E4B860 /* ConversationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationTableViewCell.swift; sourceTree = "<group>"; };
 		D1A168532927E95100421F61 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D1A168552928149A00421F61 /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
-		D1B0F7F92A298CD00033EC60 /* CustomMapAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CustomMapAnnotation.swift; path = Messenger/Resources/CustomMapAnnotation.swift; sourceTree = SOURCE_ROOT; };
+		D1B0F7F92A298CD00033EC60 /* CustomMapAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CustomMapAnnotation.swift; path = Messenger/ViewModels/CustomMapAnnotation.swift; sourceTree = SOURCE_ROOT; };
 		D1C2E146292720B400DDA8CD /* Messenger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Messenger.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1C2E149292720B400DDA8CD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D1C2E14B292720B400DDA8CD /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -112,8 +114,8 @@
 		D10857CE2A3057F3002707B3 /* Conversations */ = {
 			isa = PBXGroup;
 			children = (
-				D1C2E14D292720B400DDA8CD /* ConversationsViewController.swift */,
 				D1C2E16E29272A6700DDA8CD /* NewConversationViewController.swift */,
+				D1C2E14D292720B400DDA8CD /* ConversationsViewController.swift */,
 			);
 			path = Conversations;
 			sourceTree = "<group>";
@@ -132,6 +134,23 @@
 				D10857D12A305823002707B3 /* NotificationsViewController.swift */,
 			);
 			path = FriendRequests;
+			sourceTree = "<group>";
+		};
+		D16323B12A3674A3002E85E3 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				D1C2E152292720B500DDA8CD /* Assets.xcassets */,
+			);
+			path = Assets;
+			sourceTree = "<group>";
+		};
+		D16323B22A3674B8002E85E3 /* Manifests */ = {
+			isa = PBXGroup;
+			children = (
+				D1C2E157292720B500DDA8CD /* Info.plist */,
+				D1A168532927E95100421F61 /* GoogleService-Info.plist */,
+			);
+			path = Manifests;
 			sourceTree = "<group>";
 		};
 		D1C2E13D292720B400DDA8CD = {
@@ -155,13 +174,11 @@
 		D1C2E148292720B400DDA8CD /* Messenger */ = {
 			isa = PBXGroup;
 			children = (
+				D16323B22A3674B8002E85E3 /* Manifests */,
 				D1C2E161292722DA00DDA8CD /* Resources */,
 				D1C2E160292722D400DDA8CD /* ViewModels */,
-				D1C2E15F292722CF00DDA8CD /* Models */,
 				D1C2E15E292722C900DDA8CD /* Views */,
 				D1C2E15D292722C300DDA8CD /* Controllers */,
-				D1C2E157292720B500DDA8CD /* Info.plist */,
-				D1A168532927E95100421F61 /* GoogleService-Info.plist */,
 			);
 			path = Messenger;
 			sourceTree = "<group>";
@@ -182,25 +199,19 @@
 		D1C2E15E292722C900DDA8CD /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				D16323B12A3674A3002E85E3 /* Assets */,
 				D1C2E162292727B200DDA8CD /* Storyboards */,
-				D1C2E152292720B500DDA8CD /* Assets.xcassets */,
-				D17FF06B292DE9B300E4B860 /* ConversationTableViewCell.swift */,
-				D1CC35AB2980F7D600E70840 /* NewConversationCell.swift */,
 			);
 			path = Views;
-			sourceTree = "<group>";
-		};
-		D1C2E15F292722CF00DDA8CD /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				D1B0F7F92A298CD00033EC60 /* CustomMapAnnotation.swift */,
-			);
-			path = Models;
 			sourceTree = "<group>";
 		};
 		D1C2E160292722D400DDA8CD /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				D17FF06B292DE9B300E4B860 /* ConversationTableViewCell.swift */,
+				D1CC35AB2980F7D600E70840 /* NewConversationCell.swift */,
+				D1B0F7F92A298CD00033EC60 /* CustomMapAnnotation.swift */,
+				D16323B32A3674F1002E85E3 /* NotificationCell.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -379,6 +390,7 @@
 				D1C2E14A292720B400DDA8CD /* AppDelegate.swift in Sources */,
 				D17FF06C292DE9B300E4B860 /* ConversationTableViewCell.swift in Sources */,
 				D17AC8AC292B5C6D00A9B29F /* ChatViewController.swift in Sources */,
+				D16323B42A3674F1002E85E3 /* NotificationCell.swift in Sources */,
 				D12A24D329E4A6CE00938799 /* KeyManager.swift in Sources */,
 				D1C2E14C292720B400DDA8CD /* SceneDelegate.swift in Sources */,
 				D1E8E96429ADF700003DE95A /* FriendManager.swift in Sources */,
@@ -537,7 +549,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = HW53TJ4K2G;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Messenger/Info.plist;
+				INFOPLIST_FILE = Messenger/Manifests/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "Please allow access to take photos";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Please allow access to share current location";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Please allow access to upload photos";
@@ -574,7 +586,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = HW53TJ4K2G;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Messenger/Info.plist;
+				INFOPLIST_FILE = Messenger/Manifests/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "Please allow access to take photos";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Please allow access to share current location";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Please allow access to upload photos";

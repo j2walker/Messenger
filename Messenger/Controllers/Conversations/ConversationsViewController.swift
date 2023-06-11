@@ -37,7 +37,7 @@ struct LatestMessage {
     let kind: String
 }
 
-class ConversationsViewController: UIViewController {
+class ConversationsViewController: UIViewController, NotificationFetchDelegate {
     
     private let spinner = JGProgressHUD(style: .dark)
     
@@ -46,6 +46,8 @@ class ConversationsViewController: UIViewController {
     private var friends = [ChatFriend]()
     
     private var friendRequests = [FriendRequest]()
+    
+    private var fetchInProgress = true
 
     private let tableView: UITableView = {
         let table = UITableView()
@@ -89,19 +91,24 @@ class ConversationsViewController: UIViewController {
     
     @objc private func didTapNotifications() {
         let vc = NotificationsViewController(friendRequests: friendRequests)
+        vc.fetchDelegate = self
+        vc.hideLoadingIndicator()
+        vc.tableView.reloadData()
         let navVC = UINavigationController(rootViewController: vc)
+        vc.title = "Friend Requests"
         present(navVC, animated: true)
     }
     
     private func listenForRequests() {
         FriendManager.shared.getAllFriendRequests(completion: { [weak self] result in
+            self?.fetchInProgress = false
             switch result {
             case .success(let requests):
                 guard !requests.isEmpty else {
                     return
                 }
                 self?.friendRequests = requests
-                // actually no need to reload because the "requests" view controller will take them
+                self?.fetchCompleted(requests: requests)
             case .failure(let error):
                 print("Failed to get friend requests: \(error)")
             }
@@ -138,6 +145,18 @@ class ConversationsViewController: UIViewController {
                 self?.noConversationsLabel.isHidden = false
             }
         })
+    }
+    
+    func fetchCompleted(requests: [FriendRequest]) {
+        guard let navController = presentedViewController as? UINavigationController else { return }
+        guard let notificationVC = navController.topViewController as? NotificationsViewController else { return }
+        notificationVC.hideLoadingIndicator()
+        if requests.isEmpty {
+            notificationVC.showNoNotifications()
+        } else {
+            notificationVC.friendRequests = requests
+            notificationVC.tableView.reloadData()
+        }
     }
     
     @objc private func didTapComposeButton() {

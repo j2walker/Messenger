@@ -48,7 +48,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             map.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             map.leadingAnchor.constraint(equalTo: view.leadingAnchor),
         ])
-        
         button.clipsToBounds = true
         button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
         view.addSubview(button)
@@ -57,12 +56,16 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     
     public func updateFriendsLocations() {
         updateFriendsLocations(completion: { [weak self] in
-            guard let self = self else {return}
-            for (key, _) in friendsLocations {
-                guard let location = friendsLocations[key] else { return }
-                addPin(with: location, safeEmail: key)
+            guard let strongSelf = self else { return }
+            if (strongSelf.friendsLocations.isEmpty) {
+                strongSelf.spinner.dismiss()
+                return
             }
-            
+            strongSelf.spinner.show(in: strongSelf.view)
+            for (key, _) in strongSelf.friendsLocations {
+                guard let location = strongSelf.friendsLocations[key] else { return }
+                strongSelf.addPin(with: location, safeEmail: key)
+            }
         })
     }
     
@@ -78,7 +81,16 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     
     private func updateFriendsLocations(completion: @escaping () -> Void) {
         FriendManager.shared.getFriendsLocations(completion: { [weak self] location in
-            guard let location = location, let strongSelf = self else { return }
+            guard let location = location, let strongSelf = self else {
+                self?.spinner.dismiss()
+                completion()
+                return
+            }
+            if location.isEmpty {
+                self?.spinner.dismiss()
+                completion()
+                return
+            }
             strongSelf.friendsLocations = location
             completion()
         })
@@ -86,12 +98,11 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        spinner.show(in: view)
+        
         manager.desiredAccuracy = kCLLocationAccuracyBest
         manager.delegate = self
         manager.requestWhenInUseAuthorization()
         manager.startUpdatingLocation()
-        updateFriendsLocations()
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
